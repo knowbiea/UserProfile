@@ -19,22 +19,6 @@ final class DefaultUserListRepository {
 }
 
 extension DefaultUserListRepository: UserListRepository {
-    func fetchUserList(completion: @escaping (Result<UserList, any Error>) -> Void) -> Cancellable? {
-        let requestDTO = UserListRequestDTO(page: 1)
-        let task = RepositoryTask()
-        let endpoint = APIUserListEndPoints.user.getUserList(with: requestDTO)
-        
-        task.networkTask = dataTransferService.request(with: endpoint) { result in
-            switch result {
-            case .success(let userResponse):
-                completion(.success(userResponse.toDomain()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-        
-        return task
-    }
     
     func fetchUserList() async throws -> UserList {
         let requestDTO = UserListRequestDTO(page: 1)

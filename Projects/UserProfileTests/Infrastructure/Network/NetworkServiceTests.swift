@@ -41,127 +41,121 @@ final class NetworkServiceTests: XCTestCase {
         case someError
     }
     
-    func testNetworkService_checkingResponseIsSuccessful() {
+    func testNetworkService_checkingResponseIsSuccessfulAsync() async {
         // given
         let config = NetworkConfigurableMock()
         var responseResultData: Data = Data()
-        var completionCallsCount = 0
+        var statusCode = 0
         
+        let endpoint = EndpointMock(path: "/user", method: .get)
         let expectedResponseData = "This is a Sample Data".data(using: .utf8) ?? Data()
+        let urlResponse = HTTPURLResponse(url: config.baseURL, statusCode: 200, httpVersion: "1.1", headerFields: [:])
+        let mockNetworkSessionManager = NetworkSessionManagerMock(response: urlResponse,
+                                                                  data: expectedResponseData,
+                                                                  error: nil)
         let networkService = DefaultNetworkService(config: config,
-                                                   sessionManager: NetworkSessionManagerMock(response: nil,
-                                                                                             data: expectedResponseData,
-                                                                                             error: nil))
+                                                   sessionManager: mockNetworkSessionManager)
+        
         
         // when
-        _ = networkService.request(endpoint: EndpointMock(path: NetworkServiceTests.mockURL, method: .get)) { result in
-            guard let responseData = try? result.get() else {
-                XCTFail("Should return proper response")
-                return
-            }
+        do {
+            let (data, response) = try await networkService.request(endpoint)
+            responseResultData = data
+            statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             
-            responseResultData = responseData
-            completionCallsCount += 1
+        } catch {
+            XCTFail("Error is nil and This should not happen")
+            
         }
         
         // then
         XCTAssertEqual(responseResultData, expectedResponseData)
-        XCTAssertEqual(completionCallsCount, 1)
+        XCTAssertEqual(statusCode, 200)
     }
     
-    func testNetworkService_checkingResponseIsNetworkCancelled() {
+    func testNetworkService_checkingResponseIsNetworkCancelledAsync() async {
         // given
+        var completionCallsCount = 0
         let config = NetworkConfigurableMock()
         let cancelledError = NSError(domain: "com.sample.user.network", code: NSURLErrorCancelled)
-        var completionCallsCount = 0
         
+        let endpoint = EndpointMock(path: "/user", method: .get)
+        let urlResponse = HTTPURLResponse(url: config.baseURL, statusCode: 404, httpVersion: "1.1", headerFields: [:])
+        let mockNetworkSessionManager = NetworkSessionManagerMock(response: nil,
+                                                                  data: nil,
+                                                                  error: cancelledError as Error)
         let networkService = DefaultNetworkService(config: config,
-                                                   sessionManager: NetworkSessionManagerMock(response: nil,
-                                                                                             data: nil,
-                                                                                             error: cancelledError as Error))
+                                                   sessionManager: mockNetworkSessionManager)
+        
         
         // when
-        _ = networkService.request(endpoint: EndpointMock(path: NetworkServiceTests.mockURL, method: .get), completion: { result in
-            do {
-                _ = try result.get()
-                XCTFail("Result is empty and This should not happen")
-                
-            } catch {
-                guard case NetworkError.cancelled = error else {
-                    XCTFail("NetworkError Cancelled not found")
-                    return
-                }
-                
-                completionCallsCount += 1
-            }
-        })
+        do {
+            let (data, response) = try await networkService.request(endpoint)
+            
+        } catch {
+            completionCallsCount += 1
+        }
         
         // then
         XCTAssertEqual(completionCallsCount, 1)
     }
     
-    func testNetworkService_whenStatusCodeEqualOrAbove400() {
+    func testNetworkService_whenStatusCodeEqualOrAbove400Async() async {
         // given
         let config = NetworkConfigurableMock()
         var completionCallsCount = 0
-        var statusCode = 0
         
-        let response = HTTPURLResponse(url: URL(string: "https://www.sample.com")!,
-                                       statusCode: 500,
-                                       httpVersion: "1.1",
-                                       headerFields: [:])
+        let endpoint = EndpointMock(path: "/user", method: .get)
+        let urlResponse = HTTPURLResponse(url: config.baseURL, statusCode: 500, httpVersion: "1.1", headerFields: [:])
+        let mockNetworkSessionManager = NetworkSessionManagerMock(response: urlResponse,
+                                                                  data: nil,
+                                                                  error: NetworkErrorMock.someError)
         let networkService = DefaultNetworkService(config: config,
-                                                   sessionManager: NetworkSessionManagerMock(response: response,
-                                                                                             data: nil,
-                                                                                             error: NetworkErrorMock.someError))
+                                                   sessionManager: mockNetworkSessionManager)
         
         // when
-        _ = networkService.request(endpoint: EndpointMock(path: NetworkServiceTests.mockURL, method: .get), completion: { result in
-            do {
-                _ = try result.get()
-                XCTFail("Result is empty and This should not happen")
-                
-            } catch {
-                if case NetworkError.error(let code, _) = error {
-                    statusCode = code
-                    completionCallsCount += 1
-                }
+        do {
+            let (data, response) = try await networkService.request(endpoint)
+            XCTFail("Result is empty and This should not happen")
+            
+        } catch {
+            if case NetworkError.generic(let code) = error {
+                completionCallsCount += 1
             }
-        })
+        }
         
         // then
         XCTAssertEqual(completionCallsCount, 1)
-        XCTAssertEqual(statusCode, 500)
     }
     
-    func testNetworkService_checkingResponseIsNetworkConnected() {
+    func testNetworkService_checkingResponseIsNetworkConnected() async {
         // given
         let config = NetworkConfigurableMock()
         let error = NSError(domain: "network", code: NSURLErrorNotConnectedToInternet, userInfo: nil)
         var completionCallsCount = 0
         
         let networkErrorLogger = NetworkErrorLoggerMock()
+        let endpoint = EndpointMock(path: "/user", method: .get)
+        let mockNetworkSessionManager = NetworkSessionManagerMock(response: nil,
+                                                                  data: nil,
+                                                                  error: error as Error)
         let networkService = DefaultNetworkService(config: config,
-                                                   sessionManager: NetworkSessionManagerMock(response: nil,
-                                                                                             data: nil,
-                                                                                             error: error as Error),
+                                                   sessionManager: mockNetworkSessionManager,
                                                    logger: networkErrorLogger)
         
         // when
-        _ = networkService.request(endpoint: EndpointMock(path: NetworkServiceTests.mockURL, method: .get), completion: { result in
-            do {
-                _ = try result.get()
-                XCTFail("Result is empty and This should not happen")
-                
-            } catch {
-                guard case NetworkError.notConnected = error else {
-                    XCTFail("NetworkError Cancelled not found")
-                    return
-                }
-                
-                completionCallsCount += 1
+        do {
+            let (data, response) = try await networkService.request(endpoint)
+            XCTFail("Result is empty and This should not happen")
+            
+        } catch {
+            guard case NetworkError.notConnected = error else {
+                XCTFail("NetworkError Cancelled not found")
+                return
             }
-        })
+            
+            completionCallsCount += 1
+        }
         
         // then
         XCTAssertEqual(completionCallsCount, 1)

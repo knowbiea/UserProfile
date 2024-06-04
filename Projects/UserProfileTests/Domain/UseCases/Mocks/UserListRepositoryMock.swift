@@ -39,12 +39,6 @@ final class UserListRepositoryMock: UserListRepository {
             throw error ?? UserListRepositoryMockError.failedFetching
         }
         
-//        if let userList {
-//            return userList
-//        } else {
-//            throw error ?? UserListRepositoryMockError.failedFetching
-//        }
-        
         return userList
     }
 }

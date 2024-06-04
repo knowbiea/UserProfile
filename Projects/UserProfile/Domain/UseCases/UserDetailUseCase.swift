@@ -8,7 +8,6 @@
 import Foundation
 
 protocol UserDetailUseCase {
-    func execute(userID: Int, completion: @escaping (Result<UserDetail, Error>) -> Void) -> Cancellable?
     func execute(userID: Int) async throws -> UserDetail
 }
 
@@ -20,12 +19,6 @@ final class DefaultUserDetailUseCase: UserDetailUseCase {
     // MARK: - Initialisers
     init(userDetailRepository: UserDetailRepository) {
         self.userDetailRepository = userDetailRepository
-    }
-    
-    func execute(userID: Int, completion: @escaping (Result<UserDetail, Error>) -> Void) -> Cancellable? {
-        return userDetailRepository.fetchUserDetail(userID: userID) { result in
-            completion(result)
-        }
     }
     
     func execute(userID: Int) async throws -> UserDetail {

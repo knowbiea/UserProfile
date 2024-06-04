@@ -25,16 +25,12 @@ protocol NetworkService {
     typealias completionHandler = (Result<Data?, NetworkError>) -> Void
     
     func request<T: Requestable>(_ endpoint: T) async throws -> (data: Data, response: URLResponse)
-    func request(endpoint: Requestable,
-                 completion: @escaping completionHandler) -> NetworkCancellable?
 }
 
 protocol NetworkSessionManager {
     typealias completionHandler = (Data?, URLResponse?, Error?) -> Void
     
     func request(_ request: URLRequest) async throws -> (data: Data, response: URLResponse)
-    func request(_ request: URLRequest,
-                 completion: @escaping completionHandler) -> NetworkCancellable
 }
 
 protocol NetworkErrorLogger {
@@ -58,36 +54,6 @@ final class DefaultNetworkService {
         self.config = config
         self.sessionManager = sessionManager
         self.logger = logger
-    }
-    
-    private func request(urlRequest: URLRequest, completion: @escaping completionHandler) -> NetworkCancellable {
-        let session = sessionManager.request(urlRequest) { data, response, error in
-            let result: Result<Data?, NetworkError>
-            
-            defer {
-                completion(result)
-            }
-            
-            if let error {
-                var networkError: NetworkError
-                
-                if let response = response as? HTTPURLResponse {
-                    networkError = .error(statusCode: response.statusCode, data: data)
-                } else {
-                    networkError = self.resolve(error: error)
-                }
-                
-                self.logger.log(error: networkError)
-                result = .failure(networkError)
-                
-            } else {
-                self.logger.log(responseData: data, response: response)
-                result = .success(data)
-            }
-        }
-        
-        logger.log(request: urlRequest)
-        return session
     }
     
     private func request(urlRequest: URLRequest) async throws -> (data: Data, response: URLResponse) {
@@ -143,19 +109,6 @@ extension DefaultNetworkService: NetworkService {
     func request<T>(_ endpoint: T) async throws -> (data: Data, response: URLResponse) where T : Requestable {
         let urlRequest = try endpoint.urlRequest(with: config)
         return try await request(urlRequest: urlRequest)
-    }
-    
-    func request(endpoint: Requestable,
-                 completion: @escaping completionHandler) -> NetworkCancellable? {
-        do {
-            let urlRequest = try endpoint.urlRequest(with: config)
-            return request(urlRequest: urlRequest, completion: completion)
-            
-        } catch {
-            completion(.failure(.urlGeneration))
-            return nil
-            
-        }
     }
 }
 

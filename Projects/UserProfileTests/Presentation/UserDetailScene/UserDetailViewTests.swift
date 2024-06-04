@@ -17,7 +17,11 @@ class UserDetailViewTests: XCTestCase {
         let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
         let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
         let userDetailView = UserDetailView(viewModel: viewModel).contentUnavailableView
-        assertSnapshot(of: userDetailView.toVC, as: .image, named: "UserDetail", testName: "userDetailView_unavailable_test")
+        
+        assertSnapshot(of: userDetailView.toVC,
+                       as: .image(on: .iPhone13Pro(.portrait)),
+                       named: "UserDetail",
+                       testName: "userDetailView_unavailable_test")
     }
     
     func testUserDetailView_displayUserDetailView() {
@@ -25,6 +29,10 @@ class UserDetailViewTests: XCTestCase {
         let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
         let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
         let userDetailView = UserDetailView(viewModel: viewModel).userDetailView(user: UserDetailDTO.stub().toDomain())
-        assertSnapshot(of: userDetailView.toVC, as: .image, named: "UserDetail", testName: "userDetailView_test")
+        
+        assertSnapshot(of: userDetailView.toVC,
+                       as: .image(on: .iPhone13Pro(.portrait)),
+                       named: "UserDetail",
+                       testName: "userDetailView_test")
     }
 }

@@ -14,7 +14,6 @@ protocol UserDetailViewModelInput {
 
 protocol UserDetailViewModelOutput {
     func getUserDetail()
-    func fetchUserDetail()
 }
 
 protocol UserDetailViewModel: UserDetailViewModelInput, UserDetailViewModelOutput { }
@@ -40,6 +39,7 @@ final class DefaultUserDetailViewModel: ObservableObject, UserDetailViewModel {
         self.userDetailUseCase = userDetailUseCase
     }
     
+    // MARK: - Methods
     private func fetchUserDetail() async throws -> UserDetail {
         return try await userDetailUseCase.execute(userID: userID)
     }
@@ -58,25 +58,5 @@ final class DefaultUserDetailViewModel: ObservableObject, UserDetailViewModel {
                 
             }
         }
-    }
-    
-    func fetchUserDetail() {
-        viewState = .loading
-        userDetailTask = userDetailUseCase.execute(userID: userID, completion: { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let user):
-                    DLog("User Detail: \(user)")
-                    self.user = user
-                    self.viewState = .loaded
-                    
-                case .failure(let error):
-                    DLog("Error: \(error.localizedDescription)")
-                    self.viewState = .error
-                    
-                }
-            }
-        })
     }
 }

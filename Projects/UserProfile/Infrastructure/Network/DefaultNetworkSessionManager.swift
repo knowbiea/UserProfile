@@ -14,7 +14,8 @@ final class DefaultNetworkSessionManager: NetworkSessionManager {
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
         
-        let urlSession = URLSession(configuration: config)
+        let delegate = DefaultURLSessionDelegate()
+        let urlSession = URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
         return try await urlSession.data(for: request)
     }
 }

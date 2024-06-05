@@ -69,6 +69,7 @@
 		A4DDC0112C09A9190011D410 /* UserListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDC0072C09A9190011D410 /* UserListViewTests.swift */; };
 		A4DDC0142C09A9280011D410 /* UserList+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDC0122C09A9280011D410 /* UserList+Stub.swift */; };
 		A4DDC0152C09A9280011D410 /* UserDetail+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDC0132C09A9280011D410 /* UserDetail+Stub.swift */; };
+		A4F10A132C1040A2007B6209 /* DefaultURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F10A122C1040A2007B6209 /* DefaultURLSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		A4DDC0072C09A9190011D410 /* UserListViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewTests.swift; sourceTree = "<group>"; };
 		A4DDC0122C09A9280011D410 /* UserList+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserList+Stub.swift"; sourceTree = "<group>"; };
 		A4DDC0132C09A9280011D410 /* UserDetail+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDetail+Stub.swift"; sourceTree = "<group>"; };
+		A4F10A122C1040A2007B6209 /* DefaultURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultURLSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				A4DDBFC72C09A80C0011D410 /* DataTransferService.swift */,
+				A4F10A122C1040A2007B6209 /* DefaultURLSessionDelegate.swift */,
 				A4DDBFC82C09A80C0011D410 /* DefaultNetworkSessionManager.swift */,
 				A4DDBFC92C09A80C0011D410 /* Endpoint.swift */,
 				A4DDBFCA2C09A80C0011D410 /* NetworkConfig.swift */,
@@ -748,6 +751,7 @@
 				A4DDBF9D2C09A7E50011D410 /* DefaultUserListViewModel.swift in Sources */,
 				A4DDBFC12C09A8030011D410 /* DefaultUserListRepository.swift in Sources */,
 				A4DDBFD72C09A8170011D410 /* Constant.swift in Sources */,
+				A4F10A132C1040A2007B6209 /* DefaultURLSessionDelegate.swift in Sources */,
 				A4DDBFC32C09A8030011D410 /* UserDetailRequestDTO+Mapping.swift in Sources */,
 				A4DDBFB22C09A7F50011D410 /* UserListRepository.swift in Sources */,
 				A4DDBFDA2C09A8170011D410 /* ContentUnavailableType.swift in Sources */,

@@ -80,13 +80,11 @@ final class NetworkServiceTests: XCTestCase {
         let cancelledError = NSError(domain: "com.sample.user.network", code: NSURLErrorCancelled)
         
         let endpoint = EndpointMock(path: "/user", method: .get)
-        let urlResponse = HTTPURLResponse(url: config.baseURL, statusCode: 404, httpVersion: "1.1", headerFields: [:])
         let mockNetworkSessionManager = NetworkSessionManagerMock(response: nil,
                                                                   data: nil,
                                                                   error: cancelledError as Error)
         let networkService = DefaultNetworkService(config: config,
                                                    sessionManager: mockNetworkSessionManager)
-        
         
         // when
         do {
@@ -115,7 +113,7 @@ final class NetworkServiceTests: XCTestCase {
         
         // when
         do {
-            let (data, response) = try await networkService.request(endpoint)
+            let (_, _) = try await networkService.request(endpoint)
             XCTFail("Result is empty and This should not happen")
             
         } catch {
@@ -145,7 +143,7 @@ final class NetworkServiceTests: XCTestCase {
         
         // when
         do {
-            let (data, response) = try await networkService.request(endpoint)
+            let (_, _) = try await networkService.request(endpoint)
             XCTFail("Result is empty and This should not happen")
             
         } catch {

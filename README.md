@@ -1,7 +1,7 @@
 
 ![](https://img.shields.io/badge/Platform-Swift_UI-orange)
 
-# User Profile
+# User Profile (Dummy App)
 
 The user profile app features a user-friendly interface for exploring user details. It offers essential features for both browsing the list of available users and viewing detailed information about each selected user.
 

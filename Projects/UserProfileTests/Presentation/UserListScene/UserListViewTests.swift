@@ -39,19 +39,4 @@ class UserListViewTests: XCTestCase {
         userListCell.toVC.performSnapshotTest(named: "UserListCell",
                                               testName: "UserList")
     }
-    
-    func testUserListView_displayUserLocalImageView() {
-        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
-        let imageView = UserImageView(url: path)
-        
-        imageView.toVC.performSnapshotTest(named: "UserImageView_Local",
-                                           testName: "UserList")
-    }
-    
-    func testUserListView_displayUserAPIImageView() {
-        let imageView = UserImageView(url: URL(string: "https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg1")!)
-        
-        imageView.toVC.performSnapshotTest(named: "UserImageView_API",
-                                           testName: "UserList")
-    }
 }

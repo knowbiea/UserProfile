@@ -24,7 +24,7 @@ class UserDetailViewTests: XCTestCase {
     
     func testUserDetailView_displayUserDetailView() {
         let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
-        let repository = UserDetailRepositoryMock(userDetail: UserDetailDTO.stub().toDomain())
+        let repository = UserDetailRepositoryMock(userDetail: UserDetailDTO.stub(image: path.absoluteString).toDomain())
         let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
         let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
         let userDetailView = UserDetailView(viewModel: viewModel).userDetailView(user: UserDetailDTO.stub(image: path.absoluteString).toDomain())

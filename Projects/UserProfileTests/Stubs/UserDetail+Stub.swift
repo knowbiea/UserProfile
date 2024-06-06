@@ -21,7 +21,7 @@ extension UserDetailDTO {
               username: String? = "emilys",
               password: String? = "emilyspass",
               birthDate: String? = "1996-5-30",
-              image: String? = "https://dummyjson.com/icon/emilys/128",
+              image: String? = "",
               bloodGroup: String? = "O-",
               height: Double? = 193.24,
               weight: Double? = 63.16,

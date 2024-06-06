@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SnapshotTesting
 import XCTest
 @testable import UserProfile
 
@@ -18,40 +17,41 @@ class UserListViewTests: XCTestCase {
         let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
         let userListView = UserListView(viewModel: viewModel).contentUnavailableView
         
-        assertSnapshot(of: userListView.toVC,
-                       as: .image(on: .iPhone13Pro(.portrait)),
-                       named: "UserList",
-                       testName: "userListView_unavailable_test")
+        userListView.toVC.performSnapshotTest(named: "UserListContentUnavailable",
+                                              testName: "UserList")
     }
     
     func testUserListView_displayUserListView() {
-        
+        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
         let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
         let userCase = DefaultUserListUseCase(userRepository: repository)
         let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
-        let userListView = UserListView(viewModel: viewModel).userListView(users: UserListDTO.stub().toDomain().users ?? [])
-
-        assertSnapshot(of: userListView.toVC, 
-                       as: .image(on: .iPhone13Pro(.portrait)),
-                       named: "UserListView",
-                       testName: "userListView_test")
+        let userListView = UserListView(viewModel: viewModel).userListView(users: UserListDTO.stub(users: [UserDTO.stub(image: path.absoluteString)]).toDomain().users ?? [])
+        
+        userListView.toVC.performSnapshotTest(named: "UserListView",
+                                              testName: "UserList")
     }
     
     func testUserListView_displayUserListCell() {
-        let userListCell = UserListCell(user: UserDTO.stub().toDomain())
+        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
+        let userListCell = UserListCell(user: UserDTO.stub(image: path.absoluteString).toDomain())
         
-        assertSnapshot(of: userListCell.toVC,
-                       as: .image(on: .iPhone13Pro(.portrait)),
-                       named: "UserListCell",
-                       testName: "userListCell_test")
+        userListCell.toVC.performSnapshotTest(named: "UserListCell",
+                                              testName: "UserList")
+    }
+    
+    func testUserListView_displayUserLocalImageView() {
+        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
+        let imageView = UserImageView(url: path)
+        
+        imageView.toVC.performSnapshotTest(named: "UserImageView_Local",
+                                           testName: "UserList")
+    }
+    
+    func testUserListView_displayUserAPIImageView() {
+        let imageView = UserImageView(url: URL(string: "https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg1")!)
+        
+        imageView.toVC.performSnapshotTest(named: "UserImageView_API",
+                                           testName: "UserList")
     }
 }
-
-extension SwiftUI.View {
-    var toVC: UIViewController {
-        let hostingController = UIHostingController(rootView: self)
-        hostingController.view.frame = UIScreen.main.bounds
-        return hostingController
-    }
-}
- 

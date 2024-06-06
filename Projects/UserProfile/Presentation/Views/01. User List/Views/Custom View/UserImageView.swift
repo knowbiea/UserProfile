@@ -6,27 +6,36 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import Kingfisher
 
 struct UserImageView: View {
     
     // MARK: - Properties
     var url: URL?
+    var progressView = ProgressView()
+    @State var isImageLoaded = false
     
     // MARK: - Content View
     var body: some View {
-        WebImage(url: url) { image in
-            switch image {
-            case .empty:
-                ProgressView()
-            case .success(let image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            case .failure(_):
-                Image(.placeholder)
-                    .resizable()
+        ZStack {
+            if !isImageLoaded {
+                progressView
             }
+            
+            KFImage(url)
+                .resizable()
+                .placeholder {
+                    if isImageLoaded {
+                        Image(.placeholder)
+                            .resizable()
+                    }
+                }
+                .onSuccess { _ in
+                    isImageLoaded = true
+                }
+                .onFailure { _ in
+                    isImageLoaded = true
+                }
         }
     }
 }
@@ -34,8 +43,9 @@ struct UserImageView: View {
 #Preview {
     VStack {
         UserImageView(url: URL(string: "https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg"))
-            .frame(width: 100, height: 100)
+            .frame(width: 300, height: 400)
             .background(.red.opacity(0.2))
+            .clipped()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(.green)

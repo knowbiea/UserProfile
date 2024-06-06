@@ -88,7 +88,7 @@ final class NetworkServiceTests: XCTestCase {
         
         // when
         do {
-            let (data, response) = try await networkService.request(endpoint)
+            let (_, _) = try await networkService.request(endpoint)
             
         } catch {
             completionCallsCount += 1
@@ -117,7 +117,7 @@ final class NetworkServiceTests: XCTestCase {
             XCTFail("Result is empty and This should not happen")
             
         } catch {
-            if case NetworkError.generic(let code) = error {
+            if case NetworkError.generic = error {
                 completionCallsCount += 1
             }
         }

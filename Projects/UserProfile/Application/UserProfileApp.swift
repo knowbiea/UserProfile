@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 @main
 struct UserProfileApp: App {
@@ -13,6 +14,12 @@ struct UserProfileApp: App {
     // MARK: - Properties
     @StateObject private var appFlowCoordinator = AppFlowCoordinator(path: NavigationPath(),
                                                                  appDIContainer: AppDIContainer())
+    private let imageAuthenticationChallenge = ImageAuthenticationChallenge()
+    
+    // MARK: - Initialisers
+    init() {
+        ImageDownloader.default.authenticationChallengeResponder = imageAuthenticationChallenge
+    }
     
     // MARK: - Content View
     var body: some Scene {

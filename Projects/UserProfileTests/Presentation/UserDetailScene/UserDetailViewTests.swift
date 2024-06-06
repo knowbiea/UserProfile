@@ -18,21 +18,18 @@ class UserDetailViewTests: XCTestCase {
         let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
         let userDetailView = UserDetailView(viewModel: viewModel).contentUnavailableView
         
-        assertSnapshot(of: userDetailView.toVC,
-                       as: .image(on: .iPhone13Pro(.portrait)),
-                       named: "UserDetail",
-                       testName: "userDetailView_unavailable_test")
+        userDetailView.toVC.performSnapshotTest(named: "UserDetail_Unavailable",
+                                                testName: "UserDetail")
     }
     
     func testUserDetailView_displayUserDetailView() {
+        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
         let repository = UserDetailRepositoryMock(userDetail: UserDetailDTO.stub().toDomain())
         let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
         let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
-        let userDetailView = UserDetailView(viewModel: viewModel).userDetailView(user: UserDetailDTO.stub().toDomain())
+        let userDetailView = UserDetailView(viewModel: viewModel).userDetailView(user: UserDetailDTO.stub(image: path.absoluteString).toDomain())
         
-        assertSnapshot(of: userDetailView.toVC,
-                       as: .image(on: .iPhone13Pro(.portrait)),
-                       named: "UserDetail",
-                       testName: "userDetailView_test")
+        userDetailView.toVC.performSnapshotTest(named: "UserDetail_View",
+                                                testName: "UserDetail")
     }
 }

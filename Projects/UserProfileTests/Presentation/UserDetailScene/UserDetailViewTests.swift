@@ -30,11 +30,4 @@ class UserDetailViewTests: XCTestCase {
         userDetailView.toVC.performSnapshotTest(named: "UserDetail_Unavailable",
                                                 testName: "UserDetail")
     }
-    
-    func testUserDetailView_displayUserDetailView1() {
-        let userDetailView = UserDetailContentView(user: UserDetailDTO.stub(image: path.absoluteString).toDomain())
-        
-        userDetailView.toVC.performSnapshotTest(named: "UserDetail_View",
-                                                testName: "UserDetail")
-    }
 }

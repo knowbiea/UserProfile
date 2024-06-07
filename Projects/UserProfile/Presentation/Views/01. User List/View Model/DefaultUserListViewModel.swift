@@ -29,7 +29,7 @@ final class DefaultUserListViewModel: ObservableObject, UserListViewModel {
     @Published var hasAppeared = false
     @Published private(set) var users: [User] = []
     @Published private(set) var viewState: ViewState = .idle
-    var unavailable: ContentUnavailableType = .userList
+    var unavailableType: ContentUnavailableType = .userList
     private var actions: UserListViewActions?
     private var userListUseCase: UserListUseCase
     private var userListTask: Cancellable? { willSet { userListTask?.cancel() } }

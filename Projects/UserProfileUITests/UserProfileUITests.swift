@@ -21,15 +21,24 @@ final class UserProfileUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testUserApp() throws {
+    
+    func testUsertListVisible() {
         let app = XCUIApplication()
         app.launch()
         let scrollView = app.scrollViews
-        app.swipeUp()
-        app.swipeDown()
-        let cell = scrollView.otherElements.staticTexts["Emily Johnson"]
-        cell.tap()
-        app.swipeDown()
+        let listGridView = scrollView.otherElements["userList_listGridView"]
+        XCTAssertTrue(listGridView.waitForExistence(timeout: 5), "List View, list should be visible.")
     }
+    
+    func testUserApp() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let grid = app.otherElements["userList_listGridView"]
+        let predicate = NSPredicate(format: "identifier BEGINSWITH 'UserItem_'")
+        let gridItems = grid.descendants(matching: .any).matching(predicate)
+        let firstGridItem = gridItems.element(boundBy: 0)
+        firstGridItem.tap()
+        app.swipeDown()
+      }
 }

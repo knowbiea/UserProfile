@@ -11,29 +11,33 @@ import XCTest
 
 class UserListViewTests: XCTestCase {
     
+    var path: URL!
+    
+    override func setUp() {
+        super.setUp()
+        path = getImageFromBundle(resource: "sample", withExtension: "jpg")
+    }
+    
+    override func tearDown() {
+        path = nil
+        super.tearDown()
+    }
+    
     func testUserListView_displayUserListUnavailableView() {
-        let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
-        let userListView = UserListView(viewModel: viewModel).contentUnavailableView
+        let userListView = UserContentUnavailableView(type: .userList)
         
         userListView.toVC.performSnapshotTest(named: "UserListContentUnavailable",
                                               testName: "UserList")
     }
     
     func testUserListView_displayUserListView() {
-        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
-        let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
-        let userListView = UserListView(viewModel: viewModel).userListView(users: UserListDTO.stub(users: [UserDTO.stub(image: path.absoluteString)]).toDomain().users ?? [])
+        let userListContentView = UserListContentView(users: [UserDTO.stub(image: path.absoluteString).toDomain()])
         
-        userListView.toVC.performSnapshotTest(named: "UserListView",
+        userListContentView.toVC.performSnapshotTest(named: "UserListView",
                                               testName: "UserList")
     }
     
     func testUserListView_displayUserListCell() {
-        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
         let userListCell = UserListCell(user: UserDTO.stub(image: path.absoluteString).toDomain())
         
         userListCell.toVC.performSnapshotTest(named: "UserListCell",

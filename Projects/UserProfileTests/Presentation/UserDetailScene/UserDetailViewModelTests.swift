@@ -12,9 +12,8 @@ final class UserDetailViewModelTests: XCTestCase {
     
     func testUserDetailViewModel_checkingFetchUserDetailIsSuccessful() async {
         // given
-        let repository = UserDetailRepositoryMock(userDetail: UserDetailDTO.stub().toDomain())
-        let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
-        let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
+        let useCase = UserDetailUseCaseMock(userDetail: UserDetailDTO.stub().toDomain())
+        let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: useCase)
         
         // when
         await viewModel.getUserDetail()
@@ -30,9 +29,8 @@ final class UserDetailViewModelTests: XCTestCase {
     
     func testUserDetailViewModel_checkingFetchUserDetailIsFailure() async {
         // given
-        let repository = UserDetailRepositoryMock(error: UserDetailRepositoryMockError.failedFetching)
-        let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
-        let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
+        let useCase = UserDetailUseCaseMock(error: UserDetailRepositoryMockError.failedFetching)
+        let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: useCase)
         
         // when
         await viewModel.getUserDetail()

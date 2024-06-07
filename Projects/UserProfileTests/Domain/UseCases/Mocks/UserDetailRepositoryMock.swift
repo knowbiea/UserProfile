@@ -23,17 +23,6 @@ final class UserDetailRepositoryMock: UserDetailRepository {
         self.error = error
     }
     
-    func fetchUserDetail(userID: Int, completion: @escaping (Result<UserDetail, Error>) -> Void) -> Cancellable? {
-        if let error {
-            completion(.failure(error))
-            
-        } else if let userDetail {
-            completion(.success(userDetail))
-        }
-        
-        return nil
-    }
-    
     func fetchUserDetail(userID: Int) async throws -> UserDetail {
         if let error {
             throw error

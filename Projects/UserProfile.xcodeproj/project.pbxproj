@@ -11,9 +11,14 @@
 		A40366422C10C5A100158FFD /* ImageAuthenticationChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40366412C10C5A100158FFD /* ImageAuthenticationChallenge.swift */; };
 		A40366442C10D25900158FFD /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A40366432C10D25900158FFD /* sample.jpg */; };
 		A45654542C0DD9A500265154 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45654532C0DD9A500265154 /* Configurations.swift */; };
+		A47210DA2C12D6C60041EFE7 /* UserDetailUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47210D92C12D6C60041EFE7 /* UserDetailUseCaseMock.swift */; };
+		A47210DD2C12E2AA0041EFE7 /* UserListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47210DC2C12E2AA0041EFE7 /* UserListUseCaseMock.swift */; };
 		A4BABB982C1172CF0076A780 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BABB972C1172CF0076A780 /* UIViewController+Ext.swift */; };
 		A4BABB9A2C1172F80076A780 /* SwiftUI.View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BABB992C1172F80076A780 /* SwiftUI.View+Ext.swift */; };
 		A4BABB9C2C11730E0076A780 /* XCTestCase+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BABB9B2C11730E0076A780 /* XCTestCase+Ext.swift */; };
+		A4C72C472C1219B600007326 /* UserDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C72C462C1219B600007326 /* UserDetailContentView.swift */; };
+		A4C72C492C121AA200007326 /* UserListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C72C482C121AA200007326 /* UserListContentView.swift */; };
+		A4C72C4B2C12213700007326 /* UserContentUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C72C4A2C12213700007326 /* UserContentUnavailableView.swift */; };
 		A4C949362C0D7D1E00DF3413 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C949352C0D7D1E00DF3413 /* Color+Ext.swift */; };
 		A4C949392C0DAD1800DF3413 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4C949382C0DAD1800DF3413 /* Launch Screen.storyboard */; };
 		A4DDBF4A2C09A6BD0011D410 /* UserProfileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBF492C09A6BD0011D410 /* UserProfileApp.swift */; };
@@ -99,9 +104,14 @@
 		A40366432C10D25900158FFD /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		A45654522C0DD99000265154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A45654532C0DD9A500265154 /* Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
+		A47210D92C12D6C60041EFE7 /* UserDetailUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailUseCaseMock.swift; sourceTree = "<group>"; };
+		A47210DC2C12E2AA0041EFE7 /* UserListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListUseCaseMock.swift; sourceTree = "<group>"; };
 		A4BABB972C1172CF0076A780 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		A4BABB992C1172F80076A780 /* SwiftUI.View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI.View+Ext.swift"; sourceTree = "<group>"; };
 		A4BABB9B2C11730E0076A780 /* XCTestCase+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Ext.swift"; sourceTree = "<group>"; };
+		A4C72C462C1219B600007326 /* UserDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailContentView.swift; sourceTree = "<group>"; };
+		A4C72C482C121AA200007326 /* UserListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListContentView.swift; sourceTree = "<group>"; };
+		A4C72C4A2C12213700007326 /* UserContentUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContentUnavailableView.swift; sourceTree = "<group>"; };
 		A4C949352C0D7D1E00DF3413 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		A4C949382C0DAD1800DF3413 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A4DDBF462C09A6BD0011D410 /* UserProfile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserProfile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +212,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A47210D82C12D6BA0041EFE7 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				A47210D92C12D6C60041EFE7 /* UserDetailUseCaseMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		A47210DB2C12E2940041EFE7 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				A47210DC2C12E2AA0041EFE7 /* UserListUseCaseMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		A4BABB962C1172B10076A780 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +236,14 @@
 				A4BABB9B2C11730E0076A780 /* XCTestCase+Ext.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		A4C72C452C12199B00007326 /* Custom View */ = {
+			isa = PBXGroup;
+			children = (
+				A4C72C462C1219B600007326 /* UserDetailContentView.swift */,
+			);
+			path = "Custom View";
 			sourceTree = "<group>";
 		};
 		A4DDBF3D2C09A6BD0011D410 = {
@@ -291,6 +325,7 @@
 			children = (
 				A4DDBFD32C09A8170011D410 /* Cancellable.swift */,
 				A4DDBFD22C09A8170011D410 /* Constant.swift */,
+				A4C72C4A2C12213700007326 /* UserContentUnavailableView.swift */,
 				A4DDBFD52C09A8170011D410 /* ContentUnavailableType.swift */,
 				A4DDBFD62C09A8170011D410 /* NavigationBarModifier.swift */,
 				A4DDBFD42C09A8170011D410 /* ViewState.swift */,
@@ -424,6 +459,7 @@
 				A4DDBF8B2C09A7E50011D410 /* UserImageView.swift */,
 				A4DDBF8C2C09A7E50011D410 /* UserListCell.swift */,
 				A4DDBF8D2C09A7E50011D410 /* UserTitleView.swift */,
+				A4C72C482C121AA200007326 /* UserListContentView.swift */,
 			);
 			path = "Custom View";
 			sourceTree = "<group>";
@@ -457,6 +493,7 @@
 		A4DDBF952C09A7E50011D410 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4C72C452C12199B00007326 /* Custom View */,
 				A4DDBF942C09A7E50011D410 /* UserDetailView.swift */,
 			);
 			path = Views;
@@ -614,6 +651,7 @@
 		A4DDC0002C09A9190011D410 /* UserDetailScene */ = {
 			isa = PBXGroup;
 			children = (
+				A47210D82C12D6BA0041EFE7 /* Mock */,
 				A4DDBFFE2C09A9190011D410 /* UserDetailViewModelTests.swift */,
 				A4DDBFFF2C09A9190011D410 /* UserDetailViewTests.swift */,
 			);
@@ -623,6 +661,7 @@
 		A4DDC0082C09A9190011D410 /* UserListScene */ = {
 			isa = PBXGroup;
 			children = (
+				A47210DB2C12E2940041EFE7 /* Mock */,
 				A4DDC0062C09A9190011D410 /* UserListViewModelTests.swift */,
 				A4DDC0072C09A9190011D410 /* UserListViewTests.swift */,
 			);
@@ -794,9 +833,11 @@
 				A4DDBFB02C09A7F50011D410 /* UserList.swift in Sources */,
 				A4DDBFA32C09A7E50011D410 /* UserDetailView.swift in Sources */,
 				A4DDBFE62C09A86C0011D410 /* AppFlowCoordinator.swift in Sources */,
+				A4C72C472C1219B600007326 /* UserDetailContentView.swift in Sources */,
 				A4DDBFA22C09A7E50011D410 /* DefaultUserDetailViewModel.swift in Sources */,
 				A4DDBFD02C09A80C0011D410 /* NetworkConfig.swift in Sources */,
 				A4DDBF832C09A78B0011D410 /* UserListDIContainer.swift in Sources */,
+				A4C72C4B2C12213700007326 /* UserContentUnavailableView.swift in Sources */,
 				A4DDBF9E2C09A7E50011D410 /* UserImageView.swift in Sources */,
 				A4DDBF9C2C09A7E50011D410 /* Log+Ext.swift in Sources */,
 				A4DDBFD92C09A8170011D410 /* ViewState.swift in Sources */,
@@ -812,6 +853,7 @@
 				A4DDBFB42C09A7F50011D410 /* UserListUseCase.swift in Sources */,
 				A4DDBFC42C09A8030011D410 /* UserDetailResponseDTO+Mapping.swift in Sources */,
 				A4DDBFC52C09A8030011D410 /* UserListRequestDTO+Mapping.swift in Sources */,
+				A4C72C492C121AA200007326 /* UserListContentView.swift in Sources */,
 				A4DDBF4A2C09A6BD0011D410 /* UserProfileApp.swift in Sources */,
 				A4DDBFAF2C09A7F50011D410 /* UserDetail.swift in Sources */,
 				A4DDBFA42C09A7E50011D410 /* UserListFlowCoordinator.swift in Sources */,
@@ -822,8 +864,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A47210DD2C12E2AA0041EFE7 /* UserListUseCaseMock.swift in Sources */,
 				A4DDBFF82C09A9100011D410 /* NetworkSessionManagerMock.swift in Sources */,
 				A4DDC0142C09A9280011D410 /* UserList+Stub.swift in Sources */,
+				A47210DA2C12D6C60041EFE7 /* UserDetailUseCaseMock.swift in Sources */,
 				A4BABB9C2C11730E0076A780 /* XCTestCase+Ext.swift in Sources */,
 				A4BABB982C1172CF0076A780 /* UIViewController+Ext.swift in Sources */,
 				A4DDBFF12C09A9090011D410 /* UserListUseCaseTests.swift in Sources */,

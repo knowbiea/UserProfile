@@ -12,22 +12,27 @@ import XCTest
 
 class UserDetailViewTests: XCTestCase {
     
+    var path: URL!
+    
+    override func setUp() {
+        super.setUp()
+        path = getImageFromBundle(resource: "sample", withExtension: "jpg")
+    }
+    
+    override func tearDown() {
+        path = nil
+        super.tearDown()
+    }
+    
     func testUserDetailView_displayUserDetailUnavailableView() {
-        let repository = UserDetailRepositoryMock(userDetail: UserDetailDTO.stub().toDomain())
-        let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
-        let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
-        let userDetailView = UserDetailView(viewModel: viewModel).contentUnavailableView
+        let userDetailView = UserContentUnavailableView(type: .userDetail)
         
         userDetailView.toVC.performSnapshotTest(named: "UserDetail_Unavailable",
                                                 testName: "UserDetail")
     }
     
-    func testUserDetailView_displayUserDetailView() {
-        let path = getImageFromBundle(resource: "sample", withExtension: "jpg")
-        let repository = UserDetailRepositoryMock(userDetail: UserDetailDTO.stub(image: path.absoluteString).toDomain())
-        let userCase = DefaultUserDetailUseCase(userDetailRepository: repository)
-        let viewModel = DefaultUserDetailViewModel(userID: 1, userDetailUseCase: userCase)
-        let userDetailView = UserDetailView(viewModel: viewModel).userDetailView(user: UserDetailDTO.stub(image: path.absoluteString).toDomain())
+    func testUserDetailView_displayUserDetailView1() {
+        let userDetailView = UserDetailContentView(user: UserDetailDTO.stub(image: path.absoluteString).toDomain())
         
         userDetailView.toVC.performSnapshotTest(named: "UserDetail_View",
                                                 testName: "UserDetail")

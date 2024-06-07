@@ -12,9 +12,8 @@ final class UserListViewModelTests: XCTestCase {
     
     func testUserListViewModel_checkingFetchUserListIsSuccessful() async {
         // given
-        let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
+        let useCase = UserListUseCaseMock(userList: UserListDTO.stub().toDomain())
+        let viewModel = DefaultUserListViewModel(userListUseCase: useCase)
         
         // when
         await viewModel.getUserList()
@@ -31,9 +30,8 @@ final class UserListViewModelTests: XCTestCase {
     
     func testUserListViewModel_checkingFetchUserListIsFailure() async {
         // given
-        let repository = UserListRepositoryMock(error: UserListRepositoryMockError.failedFetching)
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
+        let useCase = UserListUseCaseMock(error: UserListRepositoryMockError.failedFetching)
+        let viewModel = DefaultUserListViewModel(userListUseCase: useCase)
         
         // when
         await viewModel.getUserList()
@@ -50,9 +48,8 @@ final class UserListViewModelTests: XCTestCase {
     
     func testUserListViewModel_didSelectUser() async {
         // given
-        let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
+        let useCase = UserListUseCaseMock(userList: UserListDTO.stub().toDomain())
+        let viewModel = DefaultUserListViewModel(userListUseCase: useCase)
         
         // when
         await viewModel.getUserList()

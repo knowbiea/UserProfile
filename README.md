@@ -1,6 +1,7 @@
 
 ![](https://img.shields.io/badge/Platform-iOS-orange?style=flat-square)
 ![](https://img.shields.io/badge/Language-Swift-blue?style=flat-square)
+![](https://img.shields.io/badge/Architecture-Clean_Architecture_with_MVVM_DI_Coordinator_Patterns-darkgreen?style=flat-square)
 
 # User Profile (Dummy App)
 

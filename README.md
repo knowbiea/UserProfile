@@ -1,5 +1,6 @@
 
-![](https://img.shields.io/badge/Platform-Swift_UI-orange)
+![](https://img.shields.io/badge/Platform-iOS-orange?style=flat-square)
+![](https://img.shields.io/badge/Language-Swift-blue?style=flat-square)
 
 # User Profile (Dummy App)
 
@@ -46,8 +47,6 @@ Website: https://dummyjson.com/docs/users
 
 
 ## Screenshots
-
-### App Icon
 
 <p align="left"><strong>App Icon & Launch Screen</strong></p>
 

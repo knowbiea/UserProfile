@@ -17,7 +17,7 @@ The user profile app features a user-friendly interface for exploring user detai
 
 - Clean Architecture with MVVM, DI and Coordinator pattern
 - SwiftUI + Combine
-- Unit Test cases (94.6% Code-Coverage)
+- Unit Test cases (94.3% Code-Coverage)
 - Designed for scalability
 - Modular code
 - Snapshots testing included on iOS 17.2, iPhone 15

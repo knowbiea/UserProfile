@@ -15,8 +15,6 @@ enum DataTransferError: Error {
 }
 
 protocol DataTransferService {
-    typealias completionHandler<T> = (Result<T, DataTransferError>) -> Void
-    
     func request<T: Decodable, E: ResponseRequestable>(with endpoint: E) async throws -> T where T == E.Response
 }
 

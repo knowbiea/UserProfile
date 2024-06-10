@@ -228,6 +228,15 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
+		A49D4F412C16D077006B32BA /* Content Unavailable View */ = {
+			isa = PBXGroup;
+			children = (
+				A4C72C4A2C12213700007326 /* UserContentUnavailableView.swift */,
+				A4DDBFD52C09A8170011D410 /* ContentUnavailableType.swift */,
+			);
+			path = "Content Unavailable View";
+			sourceTree = "<group>";
+		};
 		A4BABB962C1172B10076A780 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,10 +332,9 @@
 		A4DDBF742C09A7080011D410 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A49D4F412C16D077006B32BA /* Content Unavailable View */,
 				A4DDBFD32C09A8170011D410 /* Cancellable.swift */,
 				A4DDBFD22C09A8170011D410 /* Constant.swift */,
-				A4C72C4A2C12213700007326 /* UserContentUnavailableView.swift */,
-				A4DDBFD52C09A8170011D410 /* ContentUnavailableType.swift */,
 				A4DDBFD62C09A8170011D410 /* NavigationBarModifier.swift */,
 				A4DDBFD42C09A8170011D410 /* ViewState.swift */,
 				A45654532C0DD9A500265154 /* Configurations.swift */,

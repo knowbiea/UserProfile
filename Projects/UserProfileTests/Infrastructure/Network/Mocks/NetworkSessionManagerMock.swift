@@ -14,12 +14,6 @@ struct NetworkSessionManagerMock: NetworkSessionManager {
     let data: Data?
     let error: Error?
     
-    func request(_ request: URLRequest,
-                 completion: @escaping completionHandler) -> NetworkCancellable {
-        completion(data, response, error)
-        return URLSession.shared.dataTask(with: request)
-    }
-    
     func request(_ request: URLRequest) async throws -> (data: Data, response: URLResponse) {
         guard let data, let response else {
             throw error!

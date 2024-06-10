@@ -26,13 +26,3 @@ extension DefaultUserListRepository: UserListRepository {
         return try await dataTransferService.request(with: endpoint).toDomain()
     }
 }
-
-final class RepositoryTask: Cancellable {
-    var networkTask: NetworkCancellable?
-    var isCancelled: Bool = false
-    
-    func cancel() {
-        networkTask?.cancel()
-        isCancelled = true
-    }
-}

@@ -22,14 +22,10 @@ protocol NetworkCancellable {
 extension URLSessionTask: NetworkCancellable { }
 
 protocol NetworkService {
-    typealias completionHandler = (Result<Data?, NetworkError>) -> Void
-    
     func request<T: Requestable>(_ endpoint: T) async throws -> (data: Data, response: URLResponse)
 }
 
 protocol NetworkSessionManager {
-    typealias completionHandler = (Data?, URLResponse?, Error?) -> Void
-    
     func request(_ request: URLRequest) async throws -> (data: Data, response: URLResponse)
 }
 

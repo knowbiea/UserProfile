@@ -24,10 +24,6 @@ enum AvenirNext: String {
     func of(size: CGFloat) -> Font {
         return Font.custom("AvenirNext-\(self.rawValue)", size: size)
      }
-    
-    func of(fontSize: CGFloat) -> UIFont {
-        return UIFont(name: "AvenirNext-\(self.rawValue)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
-     }
 }
 
 extension Font {

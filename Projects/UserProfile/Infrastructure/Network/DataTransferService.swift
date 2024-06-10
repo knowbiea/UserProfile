@@ -15,11 +15,7 @@ enum DataTransferError: Error {
 }
 
 protocol DataTransferService {
-    typealias completionHandler<T> = (Result<T, DataTransferError>) -> Void
-    
     func request<T: Decodable, E: ResponseRequestable>(with endpoint: E) async throws -> T where T == E.Response
-    func request<T: Decodable, E: ResponseRequestable>(with endpoint: E,
-                                                       completion: @escaping completionHandler<T>) -> NetworkCancellable? where E.Response == T
 }
 
 final class DefaultDataTransferService {
@@ -49,20 +45,6 @@ extension DefaultDataTransferService: DataTransferService {
             guard let error = error as? NetworkError else { throw error }
             throw self.resolve(networkError: error)
             
-        }
-    }
-    
-    func request<T, E>(with endpoint: E, completion: @escaping completionHandler<T>) -> NetworkCancellable? where T : Decodable, T == E.Response, E : ResponseRequestable {
-        return networkService.request(endpoint: endpoint) { result in
-            switch result {
-            case .success(let data):
-                let result: Result<T, DataTransferError> = self.decode(data: data, decoder: endpoint.responseDecoder)
-                completion(result)
-            case .failure(let error):
-                self.errorLogger.log(error: error)
-                let error = self.resolve(networkError: error)
-                completion(.failure(error))
-            }
         }
     }
     

@@ -33,9 +33,14 @@ struct UserListCell: View {
                     Text("\(user.firstName.value) \(user.lastName.value)")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.medium15)
+                        .accessibilityIdentifier("userList_FullName")
+                        .accessibilityLabel("FullName: \(user.firstName.value) \(user.lastName.value)")
+
                     Text(user.email.value)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.regular12)
+                        .accessibilityIdentifier("userList_Email")
+                        .accessibilityLabel("Email: \(user.email.value)")
                 }
             }
             .padding(10)

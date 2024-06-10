@@ -19,7 +19,6 @@ protocol UserListViewModelInput {
 protocol UserListViewModelOutput {
     func goToUserDetailView(user: User)
     func getUserList()
-    func fetchUserList()
 }
 
 protocol UserListViewModel: UserListViewModelInput, UserListViewModelOutput {}
@@ -30,7 +29,7 @@ final class DefaultUserListViewModel: ObservableObject, UserListViewModel {
     @Published var hasAppeared = false
     @Published private(set) var users: [User] = []
     @Published private(set) var viewState: ViewState = .idle
-    var unavailable: ContentUnavailableType = .userList
+    var unavailableType: ContentUnavailableType = .userList
     private var actions: UserListViewActions?
     private var userListUseCase: UserListUseCase
     private var userListTask: Cancellable? { willSet { userListTask?.cancel() } }
@@ -45,23 +44,7 @@ final class DefaultUserListViewModel: ObservableObject, UserListViewModel {
         self.actions = actions
     }
     
-    func fetchUserList() {
-        viewState = .loading
-        userListTask = userListUseCase.execute { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let userList):
-                    self.users = userList.users ?? []
-                    self.viewState = .loaded
-                case .failure(let error):
-                    DLog("Error: \(error.localizedDescription)")
-                    self.viewState = .error
-                }
-            }
-        }
-    }
-    
+    // MARK: - Methods
     private func fetchUserList() async throws -> UserList {
         return try await userListUseCase.execute()
     }

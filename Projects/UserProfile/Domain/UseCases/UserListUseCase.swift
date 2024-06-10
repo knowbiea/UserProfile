@@ -8,7 +8,6 @@
 import Foundation
 
 protocol UserListUseCase {
-    func execute(completion: @escaping (Result<UserList, Error>) -> Void) -> Cancellable?
     func execute() async throws -> UserList
 }
 
@@ -20,12 +19,6 @@ final class DefaultUserListUseCase: UserListUseCase {
     // MARK: - Initialisers
     init(userRepository: UserListRepository) {
         self.userRepository = userRepository
-    }
-    
-    func execute(completion: @escaping (Result<UserList, Error>) -> Void) -> Cancellable? {
-        return userRepository.fetchUserList { result in
-            completion(result)
-        }
     }
     
     func execute() async throws -> UserList {

@@ -60,14 +60,16 @@ extension Requestable {
         guard var urlComponents = URLComponents(string: url) else { throw RequestGenerationError.components }
         var urlQueryItems = [URLQueryItem]()
         
-        let queryParameters = try queryParametersEncodable?.toDictionary() ?? self.queryParameters
-        queryParameters.forEach {
-            urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+        if let queryParameters = try queryParametersEncodable?.toDictionary() {
+            queryParameters.forEach {
+                urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+            }
         }
         
         networkConfig.queryParameters.forEach {
             urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
         }
+        
         urlComponents.queryItems = !urlQueryItems.isEmpty ? urlQueryItems : nil
         
         guard let url = urlComponents.url else { throw RequestGenerationError.components }

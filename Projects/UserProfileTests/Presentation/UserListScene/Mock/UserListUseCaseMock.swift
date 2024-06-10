@@ -1,18 +1,14 @@
 //
-//  UserListRepositoryMock.swift
+//  UserListUseCaseMock.swift
 //  UserProfileTests
 //
-//  Created by Arvind on 31/05/24.
+//  Created by Arvind on 07/06/24.
 //
 
 import XCTest
 @testable import UserProfile
 
-enum UserListRepositoryMockError: Error {
-    case failedFetching
-}
-
-final class UserListRepositoryMock: UserListRepository {
+final class UserListUseCaseMock: UserListUseCase {
     
     let userList: UserList?
     let error: Error?
@@ -23,7 +19,7 @@ final class UserListRepositoryMock: UserListRepository {
         self.error = error
     }
     
-    func fetchUserList() async throws -> UserList {
+    func execute() async throws -> UserList {
         guard let userList else {
             throw error ?? UserListRepositoryMockError.failedFetching
         }

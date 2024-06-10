@@ -10,70 +10,57 @@ import XCTest
 
 final class UserListViewModelTests: XCTestCase {
     
-    func testUserListViewModel_checkingFetchUserListIsSuccessful() {
+    func testUserListViewModel_checkingFetchUserListIsSuccessful() async {
         // given
-        let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
+        let useCase = UserListUseCaseMock(userList: UserListDTO.stub().toDomain())
+        let viewModel = DefaultUserListViewModel(userListUseCase: useCase)
         
         // when
-        viewModel.fetchUserList()
+        await viewModel.getUserList()
         
         // then
-        let expectation = XCTestExpectation(description: "delay")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            XCTAssertNotNil(viewModel.users, "Users Array is Empty")
-            XCTAssertEqual(viewModel.users.count, 1, "Users count doesn't match")
-            XCTAssertEqual(viewModel.users.first?.firstName, "Emily", "Users name doesn't match")
-            XCTAssertTrue(viewModel.viewState == .loaded)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 3)
+        sleep(2)
+        XCTAssertNotNil(viewModel.users, "Users Array is Empty")
+        XCTAssertEqual(viewModel.users.count, 1, "Users count doesn't match")
+        XCTAssertEqual(viewModel.users.first?.firstName, "Emily", "Users name doesn't match")
+        XCTAssertTrue(viewModel.viewState == .loaded)
+        
         addTeardownBlock { [weak viewModel] in XCTAssertNil(viewModel) }
     }
     
-    func testUserListViewModel_checkingFetchUserListIsFailure() {
+    func testUserListViewModel_checkingFetchUserListIsFailure() async {
         // given
-        let repository = UserListRepositoryMock(error: UserListRepositoryMockError.failedFetching)
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
+        let useCase = UserListUseCaseMock(error: UserListRepositoryMockError.failedFetching)
+        let viewModel = DefaultUserListViewModel(userListUseCase: useCase)
         
         // when
-        viewModel.fetchUserList()
+        await viewModel.getUserList()
         
         // then
-        let expectation = XCTestExpectation(description: "delay")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            XCTAssertNotNil(viewModel.users, "Users Array is Empty")
-            XCTAssertEqual(viewModel.users.count, 0, "Users count doesn't match")
-            XCTAssertFalse(viewModel.users.first?.firstName != nil, "Users name doesn't match")
-            XCTAssertTrue(viewModel.viewState == .error)
-            expectation.fulfill()
-        }
+        sleep(2)
+        XCTAssertNotNil(viewModel.users, "Users Array is Empty")
+        XCTAssertEqual(viewModel.users.count, 0, "Users count doesn't match")
+        XCTAssertFalse(viewModel.users.first?.firstName != nil, "Users name doesn't match")
+        XCTAssertTrue(viewModel.viewState == .error)
         
-        wait(for: [expectation], timeout: 3)
         addTeardownBlock { [weak viewModel] in XCTAssertNil(viewModel) }
     }
     
-    func testUserListViewModel_didSelectUser() {
+    func testUserListViewModel_didSelectUser() async {
         // given
-        let repository = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let userCase = DefaultUserListUseCase(userRepository: repository)
-        let viewModel = DefaultUserListViewModel(userListUseCase: userCase)
+        let useCase = UserListUseCaseMock(userList: UserListDTO.stub().toDomain())
+        let viewModel = DefaultUserListViewModel(userListUseCase: useCase)
         
         // when
-        viewModel.fetchUserList()
+        await viewModel.getUserList()
         
         // then
-        let expectation = XCTestExpectation(description: "delay")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            XCTAssertNotNil(viewModel.users, "Users Array is Empty")
-            XCTAssertEqual(viewModel.users.count, 1, "Users count doesn't match")
-            XCTAssertEqual(viewModel.users.first?.firstName, "Emily", "Users name doesn't match")
-            XCTAssertTrue(viewModel.viewState == .loaded)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 3)
+        sleep(2)
+        XCTAssertNotNil(viewModel.users, "Users Array is Empty")
+        XCTAssertEqual(viewModel.users.count, 1, "Users count doesn't match")
+        XCTAssertEqual(viewModel.users.first?.firstName, "Emily", "Users name doesn't match")
+        XCTAssertTrue(viewModel.viewState == .loaded)
+        
         addTeardownBlock { [weak viewModel] in XCTAssertNil(viewModel) }
     }
 }

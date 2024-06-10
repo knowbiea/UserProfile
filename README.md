@@ -1,7 +1,9 @@
 
-![](https://img.shields.io/badge/Platform-Swift_UI-orange)
+![](https://img.shields.io/badge/Platform-iOS-orange?style=flat-square)
+![](https://img.shields.io/badge/Language-Swift-blue?style=flat-square)
+![](https://img.shields.io/badge/Architecture-Clean_Architecture_with_MVVM_DI_Coordinator_Patterns-darkgreen?style=flat-square)
 
-# User Profile
+# User Profile (Dummy App)
 
 The user profile app features a user-friendly interface for exploring user details. It offers essential features for both browsing the list of available users and viewing detailed information about each selected user.
 
@@ -15,9 +17,10 @@ The user profile app features a user-friendly interface for exploring user detai
 
 - Clean Architecture with MVVM, DI and Coordinator pattern
 - SwiftUI + Combine
-- Unit Test cases (89.6% Code-Coverage)
+- Unit Test cases (94.3% Code-Coverage)
 - Designed for scalability
 - Modular code
+- Snapshots testing included on iOS 17.2, iPhone 15
 
 
 ## API Reference
@@ -45,8 +48,6 @@ Website: https://dummyjson.com/docs/users
 
 
 ## Screenshots
-
-### App Icon
 
 <p align="left"><strong>App Icon & Launch Screen</strong></p>
 

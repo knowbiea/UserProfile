@@ -9,63 +9,6 @@ import XCTest
 @testable import UserProfile
 
 final class UserListUseCaseTests: XCTestCase {
-
-    func testUserListUseCase_whenSuccessfullyFetchingUserList() {
-        // given
-        var userList: UserList?
-        let userListRepositoryMock = UserListRepositoryMock(userList: UserListDTO.stub().toDomain())
-        let useCase = DefaultUserListUseCase(userRepository: userListRepositoryMock)
-        
-        // when
-        _ = useCase.execute(completion: { result in
-            if case let .success(list) = result {
-                userList = list
-            }
-        })
-        
-        // then
-        XCTAssertTrue(userList != nil)
-    }
-    
-    func testUserListUseCase_whenSuccessfullyFetchingUserListWithEmptyUser() {
-        // given
-        var users: [User] = []
-        let userListRepositoryMock = UserListRepositoryMock(userList: UserList(users: [], 
-                                                                               total: 150,
-                                                                               skip: 0,
-                                                                               limit: 12))
-        let useCase = DefaultUserListUseCase(userRepository: userListRepositoryMock)
-        
-        // when
-        _ = useCase.execute(completion: { result in
-            if case let .success(list) = result {
-                users = list.users ?? []
-            }
-        })
-        
-        // then
-        XCTAssertTrue(users.isEmpty)
-    }
-
-    func testUserListUseCase_whenFailedFetchingUserList() {
-        // given
-        var userList: UserList?
-        var failedError: Error?
-        let userListRepositoryMock = UserListRepositoryMock(error: UserListRepositoryMockError.failedFetching)
-        let useCase = DefaultUserListUseCase(userRepository: userListRepositoryMock)
-        
-        // when
-        _ = useCase.execute(completion: { result in
-            switch result {
-            case .success(let user): userList = user
-            case .failure(let error): failedError = error
-            }
-        })
-        
-        // then
-        XCTAssertTrue(userList == nil)
-        XCTAssertNotNil(failedError)
-    }
     
     // MARK: - Async Testing
     func testUserListUseCase_whenSuccessfullyFetchingUserListAsync() async {

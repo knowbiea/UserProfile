@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Single Responsibility Principles
 protocol UserListUseCase {
     func execute() async throws -> UserList
 }

@@ -13,7 +13,7 @@ struct MainView: View {
     @EnvironmentObject var appCoordinator: AppFlowCoordinator
     private let appDIContainer: AppDIContainer
     
-    // MARK: - Intialisers
+    // MARK: - Initialisers
     init(appDIContainer: AppDIContainer) {
         self.appDIContainer = appDIContainer
     }

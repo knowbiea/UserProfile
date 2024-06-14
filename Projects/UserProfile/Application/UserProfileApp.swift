@@ -13,7 +13,7 @@ struct UserProfileApp: App {
     
     // MARK: - Properties
     @StateObject private var appFlowCoordinator = AppFlowCoordinator(path: NavigationPath(),
-                                                                 appDIContainer: AppDIContainer())
+                                                                     appDIContainer: AppDIContainer())
     private let imageAuthenticationChallenge = ImageAuthenticationChallenge()
     
     // MARK: - Initialisers

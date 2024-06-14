@@ -36,6 +36,9 @@ extension UserListDIContainer: UserListFlowCoordinatorDependencies {
         DefaultUserDetailViewModel(userID: userID, userDetailUseCase: makeUserDetailUseCase())
     }
     
+    // MARK: - Dependency Inversion Principles
+    // MARK: - Liskov Substitution Principles
+    
     // MARK: - Use Case
     func makeUserListUseCase() -> UserListUseCase {
         DefaultUserListUseCase(userRepository: makeUserListRepository())

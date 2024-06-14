@@ -20,7 +20,7 @@ struct ApiDataNetworkConfig: NetworkConfigurable {
     var headers: [String : String]
     var queryParameters: [String : String]
     
-    // MARK: - Intialisers
+    // MARK: - Initialisers
     init(baseURL: URL, 
          headers: [String: String] = [:],
          queryParameters: [String: String] = [:]) {

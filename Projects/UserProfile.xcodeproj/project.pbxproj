@@ -58,7 +58,6 @@
 		A4DDBFD02C09A80C0011D410 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFCA2C09A80C0011D410 /* NetworkConfig.swift */; };
 		A4DDBFD12C09A80C0011D410 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFCB2C09A80C0011D410 /* NetworkService.swift */; };
 		A4DDBFD72C09A8170011D410 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFD22C09A8170011D410 /* Constant.swift */; };
-		A4DDBFD82C09A8170011D410 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFD32C09A8170011D410 /* Cancellable.swift */; };
 		A4DDBFD92C09A8170011D410 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFD42C09A8170011D410 /* ViewState.swift */; };
 		A4DDBFDA2C09A8170011D410 /* ContentUnavailableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFD52C09A8170011D410 /* ContentUnavailableType.swift */; };
 		A4DDBFDB2C09A8170011D410 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBFD62C09A8170011D410 /* NavigationBarModifier.swift */; };
@@ -154,7 +153,6 @@
 		A4DDBFCA2C09A80C0011D410 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		A4DDBFCB2C09A80C0011D410 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		A4DDBFD22C09A8170011D410 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		A4DDBFD32C09A8170011D410 /* Cancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		A4DDBFD42C09A8170011D410 /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		A4DDBFD52C09A8170011D410 /* ContentUnavailableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentUnavailableType.swift; sourceTree = "<group>"; };
 		A4DDBFD62C09A8170011D410 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
@@ -333,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				A49D4F412C16D077006B32BA /* Content Unavailable View */,
-				A4DDBFD32C09A8170011D410 /* Cancellable.swift */,
 				A4DDBFD22C09A8170011D410 /* Constant.swift */,
 				A4DDBFD62C09A8170011D410 /* NavigationBarModifier.swift */,
 				A4DDBFD42C09A8170011D410 /* ViewState.swift */,
@@ -826,7 +823,6 @@
 				A4DDBFB12C09A7F50011D410 /* UserDetailRepository.swift in Sources */,
 				A4DDBFCF2C09A80C0011D410 /* Endpoint.swift in Sources */,
 				A4DDBF9F2C09A7E50011D410 /* UserListCell.swift in Sources */,
-				A4DDBFD82C09A8170011D410 /* Cancellable.swift in Sources */,
 				A4DDBF9D2C09A7E50011D410 /* DefaultUserListViewModel.swift in Sources */,
 				A4DDBFC12C09A8030011D410 /* DefaultUserListRepository.swift in Sources */,
 				A4DDBFD72C09A8170011D410 /* Constant.swift in Sources */,

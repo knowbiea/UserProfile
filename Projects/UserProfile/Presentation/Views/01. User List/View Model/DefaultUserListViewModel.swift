@@ -32,13 +32,12 @@ final class DefaultUserListViewModel: ObservableObject, UserListViewModel {
     var unavailableType: ContentUnavailableType = .userList
     private var actions: UserListViewActions?
     private var userListUseCase: UserListUseCase
-    private var userListTask: Cancellable? { willSet { userListTask?.cancel() } }
     
     var isLoading: Bool {
         viewState == .loading
     }
     
-    // MARK: - Intialisers
+    // MARK: - Initialisers
     init(userListUseCase: UserListUseCase, actions: UserListViewActions? = nil) {
         self.userListUseCase = userListUseCase
         self.actions = actions

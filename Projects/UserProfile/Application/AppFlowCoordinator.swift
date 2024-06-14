@@ -13,7 +13,7 @@ final class AppFlowCoordinator: ObservableObject {
     @Published var path: NavigationPath
     private let appDIContainer: AppDIContainer
 
-    // MARK: - Intialisers
+    // MARK: - Initialisers
     init(path: NavigationPath, appDIContainer: AppDIContainer) {
         self.path = path
         self.appDIContainer = appDIContainer

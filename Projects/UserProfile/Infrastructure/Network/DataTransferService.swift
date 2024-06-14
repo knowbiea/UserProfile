@@ -25,6 +25,7 @@ final class DefaultDataTransferService {
     private let errorResolver: DataTransferErrorResolver
     private let errorLogger: DataTransferErrorLogger
     
+    // MARK: - Dependency Inversion Principles
     init(networkService: NetworkService,
         errorResolver: DataTransferErrorResolver = DefaultDataTransferErrorResolver(),
         errorLogger: DataTransferErrorLogger = DefaultDataTransferErrorLogger()) {

@@ -23,7 +23,6 @@ final class DefaultUserDetailViewModel: ObservableObject, UserDetailViewModel {
     // MARK: - Properties
     private var userID: Int
     private var userDetailUseCase: UserDetailUseCase
-    private var userDetailTask: Cancellable? { willSet { userDetailTask?.cancel() } }
     var unavailableType: ContentUnavailableType = .userDetail
     @Published private(set) var user: UserDetail?
     @Published private(set) var viewState: ViewState = .idle

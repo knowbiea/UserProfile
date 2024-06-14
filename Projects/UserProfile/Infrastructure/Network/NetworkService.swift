@@ -15,12 +15,7 @@ enum NetworkError: Error {
     case urlGeneration
 }
 
-protocol NetworkCancellable {
-    func cancel()
-}
-
-extension URLSessionTask: NetworkCancellable { }
-
+// MARK: - Interface Segregation Principles
 protocol NetworkService {
     func request<T: Requestable>(_ endpoint: T) async throws -> (data: Data, response: URLResponse)
 }
@@ -35,6 +30,7 @@ protocol NetworkErrorLogger {
     func log(error: Error)
 }
 
+// MARK: - Open Close Principles
 // MARK: - Network Service Implementation
 final class DefaultNetworkService {
     
@@ -43,6 +39,7 @@ final class DefaultNetworkService {
     private let sessionManager: NetworkSessionManager
     private let logger: NetworkErrorLogger
     
+    // MARK: - Dependency Inversion Principles
     init(config: NetworkConfigurable,
          sessionManager: NetworkSessionManager = DefaultNetworkSessionManager(),
          logger: NetworkErrorLogger = DefaultNetworkErrorLogger()) {
